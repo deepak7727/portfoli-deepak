@@ -7,18 +7,18 @@ import { isPlatformBrowser } from '@angular/common';
   template: `
     @if (isEnabled()) {
       <div 
-        class="custom-cursor-dot" 
+        class="dotr-cursor-dot" 
         [style.transform]="'translate3d(' + dotX() + 'px, ' + dotY() + 'px, 0)'"
         [class.hidden]="!isVisible()">
       </div>
       <div 
-        class="custom-cursor-ring"
+        class="dotr-cursor-ring"
         [class.is-hovering]="cursorState() === 'hover'"
         [class.is-project]="cursorState() === 'project'"
         [class.hidden]="!isVisible()"
         [style.transform]="'translate3d(' + ringX() + 'px, ' + ringY() + 'px, 0)'">
         @if (cursorState() === 'project') {
-          <span class="view-tag">VIEW</span>
+          <span class="project-indicator">VIEW</span>
         }
       </div>
     }
@@ -32,40 +32,41 @@ import { isPlatformBrowser } from '@angular/common';
       width: 100%;
       height: 100%;
       z-index: 999999;
-      pointer-events: none;
     }
 
-    .custom-cursor-dot {
+    .dotr-cursor-dot {
       position: fixed;
-      top: -4px;
-      left: -4px;
-      width: 8px;
-      height: 8px;
-      background: #00f2fe;
+      top: -3px;
+      left: -3px;
+      width: 6px;
+      height: 6px;
+      background: #3b82f6;
       border-radius: 50%;
       pointer-events: none;
       z-index: 999999;
-      box-shadow: 0 0 10px #00f2fe, 0 0 20px rgba(0, 242, 254, 0.6);
-      transition: opacity 0.15s ease, transform 0.02s linear;
+      box-shadow: 0 0 8px rgba(59, 130, 246, 0.8);
+      transition: opacity 0.15s ease;
       will-change: transform;
     }
 
-    .custom-cursor-ring {
+    .dotr-cursor-ring {
       position: fixed;
-      top: -20px;
-      left: -20px;
-      width: 40px;
-      height: 40px;
-      border: 1.5px solid rgba(0, 242, 254, 0.55);
+      top: -18px;
+      left: -18px;
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid rgba(59, 130, 246, 0.7);
+      background: rgba(59, 130, 246, 0.12);
       border-radius: 50%;
       pointer-events: none;
       z-index: 999998;
-      box-shadow: 0 0 15px rgba(0, 242, 254, 0.15);
+      backdrop-filter: blur(1px);
       transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
                   height 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-                  border-color 0.25s ease,
-                  background-color 0.25s ease,
-                  box-shadow 0.25s ease,
+                  top 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  left 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.2s ease,
+                  background-color 0.2s ease,
                   opacity 0.15s ease;
       will-change: transform;
       display: flex;
@@ -73,41 +74,30 @@ import { isPlatformBrowser } from '@angular/common';
       justify-content: center;
     }
 
-    .custom-cursor-ring.is-hovering {
-      top: -28px;
-      left: -28px;
-      width: 56px;
-      height: 56px;
-      border-color: rgba(56, 189, 248, 0.9);
-      background-color: rgba(0, 242, 254, 0.08);
-      box-shadow: 0 0 25px rgba(0, 242, 254, 0.35);
+    .dotr-cursor-ring.is-hovering {
+      top: -24px;
+      left: -24px;
+      width: 48px;
+      height: 48px;
+      border-color: rgba(96, 165, 250, 0.9);
+      background: rgba(59, 130, 246, 0.2);
     }
 
-    .custom-cursor-ring.is-project {
-      top: -38px;
-      left: -38px;
-      width: 76px;
-      height: 76px;
-      border-color: #8b5cf6;
-      background-color: rgba(139, 92, 246, 0.18);
-      box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
-      backdrop-filter: blur(2px);
+    .dotr-cursor-ring.is-project {
+      top: -32px;
+      left: -32px;
+      width: 64px;
+      height: 64px;
+      border-color: #60a5fa;
+      background: rgba(29, 78, 216, 0.3);
     }
 
-    .view-tag {
+    .project-indicator {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 0.65rem;
       font-weight: 700;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       color: #ffffff;
-      text-shadow: 0 0 8px rgba(139, 92, 246, 0.9);
-      pointer-events: none;
-      animation: pulseText 1.5s ease-in-out infinite alternate;
-    }
-
-    @keyframes pulseText {
-      from { transform: scale(0.95); opacity: 0.85; }
-      to { transform: scale(1.05); opacity: 1; }
     }
 
     .hidden {
@@ -137,7 +127,6 @@ export class CursorComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     if (!isPlatformBrowser(this.platformId)) return;
 
-    // Check touch and reduced motion
     const isFinePointer = window.matchMedia('(pointer: fine)').matches;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -161,14 +150,12 @@ export class CursorComponent implements OnInit, OnDestroy {
         return;
       }
 
-      const isProject = !!target.closest('.project-card, [data-cursor="project"]');
-      if (isProject) {
+      if (target.closest('.project-card, [data-cursor="project"]')) {
         this.cursorState.set('project');
         return;
       }
 
-      const isClickable = !!target.closest('a, button, input, textarea, select, .cyber-btn-primary, .cyber-btn-secondary, [role="button"], [data-cursor="hover"]');
-      if (isClickable) {
+      if (target.closest('a, button, input, textarea, select, .dotr-btn-primary, .dotr-btn-secondary, [role="button"]')) {
         this.cursorState.set('hover');
         return;
       }
@@ -176,28 +163,12 @@ export class CursorComponent implements OnInit, OnDestroy {
       this.cursorState.set('default');
     };
 
-    const onMouseLeave = () => {
-      this.isVisible.set(false);
-    };
-
-    const onMouseEnter = () => {
-      this.isVisible.set(true);
-    };
-
     window.addEventListener('mousemove', onMouseMove, { passive: true });
-    document.body.addEventListener('mouseleave', onMouseLeave);
-    document.body.addEventListener('mouseenter', onMouseEnter);
+    document.body.addEventListener('mouseleave', () => this.isVisible.set(false));
+    document.body.addEventListener('mouseenter', () => this.isVisible.set(true));
 
-    this.listeners.push(
-      () => window.removeEventListener('mousemove', onMouseMove),
-      () => document.body.removeEventListener('mouseleave', onMouseLeave),
-      () => document.body.removeEventListener('mouseenter', onMouseEnter)
-    );
-
-    // Smooth lerp loop for the outer ring
     const renderLoop = () => {
-      // Lerp factor
-      const ease = 0.16;
+      const ease = 0.18;
       this.currentRingX += (this.targetX - this.currentRingX) * ease;
       this.currentRingY += (this.targetY - this.currentRingY) * ease;
 

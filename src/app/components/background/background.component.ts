@@ -1,33 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, OnInit, OnDestroy, viewChild, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+
+interface Dot {
+  x: number;
+  y: number;
+  size: number;
+  opacity: number;
+  speedX: number;
+  speedY: number;
+  parallaxFactor: number;
+}
 
 @Component({
   selector: 'app-background',
   standalone: true,
   template: `
-    <div class="futuristic-background-container" aria-hidden="true">
-      <!-- Cyber Perspective Grid with Radial Mask -->
-      <div class="cyber-grid"></div>
+    <div class="dotr-background-wrap" aria-hidden="true">
+      <!-- Ambient Edge Vignette (like dotr.in) -->
+      <div class="dotr-ambient-aura"></div>
       
-      <!-- Ambient Glowing Orbs -->
-      <div class="orb orb-cyan"></div>
-      <div class="orb orb-violet"></div>
-      <div class="orb orb-blue"></div>
-      <div class="orb orb-emerald"></div>
-
-      <!-- Subtle Cyber Scan/Wave Lines -->
-      <div class="cyber-scanline"></div>
-
-      <!-- Floating Star / Particle Dots -->
-      <div class="particles-layer">
-        <span class="particle p1"></span>
-        <span class="particle p2"></span>
-        <span class="particle p3"></span>
-        <span class="particle p4"></span>
-        <span class="particle p5"></span>
-        <span class="particle p6"></span>
-        <span class="particle p7"></span>
-        <span class="particle p8"></span>
-      </div>
+      <!-- Interactive Constellation Particle Canvas -->
+      <canvas #particleCanvas class="dotr-particle-canvas"></canvas>
     </div>
   `,
   styles: [`
@@ -37,135 +30,129 @@ import { Component } from '@angular/core';
       left: 0;
       width: 100vw;
       height: 100vh;
-      overflow: hidden;
       z-index: 0;
       pointer-events: none;
+      overflow: hidden;
     }
 
-    .futuristic-background-container {
+    .dotr-background-wrap {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 50% 20%, #0d1322 0%, #07090e 70%, #040508 100%);
+      background: radial-gradient(ellipse 90% 70% at 50% 20%, #060b26 0%, #020617 75%, #010410 100%);
     }
 
-    /* Cyber Grid */
-    .cyber-grid {
+    .dotr-particle-canvas {
       position: absolute;
       inset: 0;
-      background-size: 50px 50px;
-      background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-      mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 30%, transparent 85%);
-      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 30%, transparent 85%);
-      opacity: 0.8;
-    }
-
-    /* Large Ambient Blurred Glowing Orbs */
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(100px);
-      -webkit-filter: blur(100px);
-      opacity: 0.35;
+      width: 100%;
+      height: 100%;
       pointer-events: none;
-      will-change: transform;
-    }
-
-    .orb-cyan {
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, #00f2fe 0%, rgba(0, 242, 254, 0.2) 70%, transparent 100%);
-      top: -100px;
-      left: -100px;
-      animation: floatOrb1 22s ease-in-out infinite alternate;
-    }
-
-    .orb-violet {
-      width: 550px;
-      height: 550px;
-      background: radial-gradient(circle, #8b5cf6 0%, rgba(139, 92, 246, 0.2) 70%, transparent 100%);
-      top: 25%;
-      right: -150px;
-      animation: floatOrb2 26s ease-in-out infinite alternate;
-    }
-
-    .orb-blue {
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, #1d4ed8 0%, rgba(29, 78, 216, 0.15) 70%, transparent 100%);
-      bottom: -150px;
-      left: 15%;
-      animation: floatOrb3 30s ease-in-out infinite alternate;
-    }
-
-    .orb-emerald {
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, #10b981 0%, rgba(16, 185, 129, 0.15) 70%, transparent 100%);
-      bottom: 20%;
-      right: 25%;
-      opacity: 0.18;
-      animation: floatOrb4 24s ease-in-out infinite alternate;
-    }
-
-    /* Subtle Floating Particles */
-    .particles-layer {
-      position: absolute;
-      inset: 0;
-    }
-
-    .particle {
-      position: absolute;
-      border-radius: 50%;
-      background: #38bdf8;
-      box-shadow: 0 0 10px #38bdf8;
-      animation: particleFloat 12s ease-in-out infinite;
-    }
-
-    .p1 { width: 3px; height: 3px; top: 15%; left: 20%; animation-delay: 0s; opacity: 0.4; }
-    .p2 { width: 4px; height: 4px; top: 35%; left: 75%; animation-delay: 2s; opacity: 0.6; }
-    .p3 { width: 2px; height: 2px; top: 60%; left: 40%; animation-delay: 4s; opacity: 0.5; }
-    .p4 { width: 3px; height: 3px; top: 80%; left: 85%; animation-delay: 1s; opacity: 0.4; }
-    .p5 { width: 2px; height: 2px; top: 25%; left: 60%; animation-delay: 3s; opacity: 0.3; }
-    .p6 { width: 4px; height: 4px; top: 70%; left: 15%; animation-delay: 5s; opacity: 0.5; }
-    .p7 { width: 3px; height: 3px; top: 45%; left: 90%; animation-delay: 2.5s; opacity: 0.4; }
-    .p8 { width: 2px; height: 2px; top: 90%; left: 50%; animation-delay: 4.5s; opacity: 0.6; }
-
-    @keyframes floatOrb1 {
-      0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(120px, 80px) scale(1.12); }
-      100% { transform: translate(60px, 140px) scale(0.95); }
-    }
-
-    @keyframes floatOrb2 {
-      0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(-100px, 90px) scale(1.1); }
-      100% { transform: translate(-50px, -60px) scale(0.9); }
-    }
-
-    @keyframes floatOrb3 {
-      0% { transform: translate(0, 0) scale(0.95); }
-      50% { transform: translate(80px, -90px) scale(1.15); }
-      100% { transform: translate(-60px, -40px) scale(1); }
-    }
-
-    @keyframes floatOrb4 {
-      0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(-70px, -70px) scale(1.1); }
-      100% { transform: translate(50px, -40px) scale(0.92); }
-    }
-
-    @keyframes particleFloat {
-      0%, 100% { transform: translateY(0px) scale(1); opacity: 0.3; }
-      50% { transform: translateY(-25px) scale(1.3); opacity: 0.8; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .orb, .particle {
-        animation: none !important;
-      }
     }
   `]
 })
-export class BackgroundComponent {}
+export class BackgroundComponent implements OnInit, OnDestroy {
+  private readonly platformId = inject(PLATFORM_ID);
+  readonly canvasRef = viewChild<ElementRef<HTMLCanvasElement>>('particleCanvas');
+
+  private animationFrameId: number | null = null;
+  private dots: Dot[] = [];
+  private mouseX = 0;
+  private mouseY = 0;
+  private targetMouseX = 0;
+  private targetMouseY = 0;
+  private resizeListener: (() => void) | null = null;
+  private mouseListener: ((e: MouseEvent) => void) | null = null;
+
+  ngOnInit(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    setTimeout(() => {
+      this.initCanvas();
+    }, 50);
+  }
+
+  private initCanvas(): void {
+    const canvasEl = this.canvasRef()?.nativeElement;
+    if (!canvasEl) return;
+
+    const ctx = canvasEl.getContext('2d');
+    if (!ctx) return;
+
+    const updateDimensions = () => {
+      canvasEl.width = window.innerWidth;
+      canvasEl.height = window.innerHeight;
+      this.createDots(canvasEl.width, canvasEl.height);
+    };
+
+    updateDimensions();
+
+    this.resizeListener = () => updateDimensions();
+    window.addEventListener('resize', this.resizeListener, { passive: true });
+
+    this.mouseListener = (e: MouseEvent) => {
+      this.targetMouseX = (e.clientX - window.innerWidth / 2) * 0.05;
+      this.targetMouseY = (e.clientY - window.innerHeight / 2) * 0.05;
+    };
+    window.addEventListener('mousemove', this.mouseListener, { passive: true });
+
+    const render = () => {
+      // Lerp mouse offset
+      this.mouseX += (this.targetMouseX - this.mouseX) * 0.05;
+      this.mouseY += (this.targetMouseY - this.mouseY) * 0.05;
+
+      ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
+
+      for (const dot of this.dots) {
+        dot.x += dot.speedX;
+        dot.y += dot.speedY;
+
+        // Wrap around bounds
+        if (dot.x < 0) dot.x = canvasEl.width;
+        if (dot.x > canvasEl.width) dot.x = 0;
+        if (dot.y < 0) dot.y = canvasEl.height;
+        if (dot.y > canvasEl.height) dot.y = 0;
+
+        const renderX = dot.x + this.mouseX * dot.parallaxFactor;
+        const renderY = dot.y + this.mouseY * dot.parallaxFactor;
+
+        ctx.beginPath();
+        ctx.arc(renderX, renderY, dot.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(180, 200, 240, ${dot.opacity})`;
+        ctx.fill();
+      }
+
+      this.animationFrameId = requestAnimationFrame(render);
+    };
+
+    render();
+  }
+
+  private createDots(width: number, height: number): void {
+    const count = Math.min(Math.floor((width * height) / 8000), 120);
+    this.dots = [];
+
+    for (let i = 0; i < count; i++) {
+      this.dots.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        size: Math.random() < 0.8 ? Math.random() * 1.5 + 0.6 : Math.random() * 2.5 + 1.2,
+        opacity: Math.random() * 0.45 + 0.15,
+        speedX: (Math.random() - 0.5) * 0.25,
+        speedY: (Math.random() - 0.5) * 0.25,
+        parallaxFactor: Math.random() * 0.8 + 0.2
+      });
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.animationFrameId !== null) {
+      cancelAnimationFrame(this.animationFrameId);
+    }
+    if (this.resizeListener) {
+      window.removeEventListener('resize', this.resizeListener);
+    }
+    if (this.mouseListener) {
+      window.removeEventListener('mousemove', this.mouseListener);
+    }
+  }
+}

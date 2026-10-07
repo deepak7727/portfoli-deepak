@@ -1,262 +1,244 @@
 @import 'tailwindcss';
 
 /* ==========================================================================
-   FUTURISTIC 2026/2030 DESIGN SYSTEM & GLOBAL VARIABLES
+   DOTR-INSPIRED REFINED DESIGN SYSTEM (ZERO NEON, PURE AGENCY PRECISION)
    ========================================================================== */
 :root {
-  --bg-space: #07090e;
-  --bg-deep: #0a0e17;
-  --bg-surface: #101623;
-  --bg-card: rgba(16, 22, 35, 0.72);
-  --bg-card-hover: rgba(22, 30, 48, 0.85);
+  --bg-main: #020617;
+  --bg-deep: #050827;
+  --bg-card: rgba(15, 23, 42, 0.6);
+  --bg-card-hover: rgba(30, 41, 59, 0.7);
+  --bg-card-solid: #090e24;
   
-  --cyan-primary: #00f2fe;
-  --cyan-neon: #38bdf8;
-  --cyan-glow: rgba(0, 242, 254, 0.35);
+  --primary-blue: #1d4ed8;
+  --primary-blue-hover: #2563eb;
+  --primary-navy: #000033;
+  --accent-soft-blue: #3b82f6;
   
-  --violet-primary: #8b5cf6;
-  --violet-neon: #a855f7;
-  --violet-glow: rgba(139, 92, 246, 0.3);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-card: rgba(255, 255, 255, 0.12);
+  --border-hover: rgba(59, 130, 246, 0.4);
   
-  --emerald-accent: #10b981;
-  --emerald-glow: rgba(16, 185, 129, 0.3);
+  --text-main: #ffffff;
+  --text-muted: #94a3b8;
+  --text-light: #e2e8f0;
   
-  --border-glass: rgba(255, 255, 255, 0.08);
-  --border-glass-hover: rgba(56, 189, 248, 0.4);
-  --border-cyan: rgba(0, 242, 254, 0.35);
-  
-  --font-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'DM Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 
-/* Base resets & typography */
 html {
   scroll-behavior: smooth;
   font-family: var(--font-body);
-  background-color: var(--bg-space);
-  color: #f1f5f9;
+  background-color: var(--bg-main);
+  color: var(--text-light);
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--bg-space);
-  color: #f1f5f9;
+  background-color: var(--bg-main);
+  color: var(--text-light);
   font-family: var(--font-body);
   overflow-x: hidden;
   position: relative;
   min-height: 100vh;
 }
 
-/* Headings */
+/* Headings matching dotr.in */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
+  font-family: var(--font-display);
   letter-spacing: -0.025em;
+  font-weight: 700;
+  color: #ffffff;
 }
 
 code, pre, .font-mono {
   font-family: var(--font-mono);
 }
 
-/* Custom Futuristic Scrollbar */
+/* Refined Minimalist Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #07090e;
+  background: #020617;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #334155;
   border-radius: 9999px;
-  border: 2px solid #07090e;
-  transition: background 0.3s ease;
+  border: 1px solid #020617;
+  transition: background 0.2s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #00f2fe;
-  box-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+  background: #475569;
 }
 
 /* ==========================================================================
-   GLASSMORPHISM & CYBER UTILITIES
+   DOTR COMPONENT UTILITIES (CARDS, BADGES, PILLS, BUTTONS)
    ========================================================================== */
-.glass-panel {
-  background: rgba(16, 22, 35, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border-glass);
+
+/* Ambient Viewport Aura (Soft Blue Vignette around edges like dotr.in) */
+.dotr-ambient-aura {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  box-shadow: inset 0 0 140px 30px rgba(29, 78, 216, 0.12);
 }
 
-.glass-card {
-  background: var(--bg-card);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid var(--border-glass);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.glass-card:hover {
-  background: var(--bg-card-hover);
-  border-color: var(--border-glass-hover);
-  box-shadow: 0 12px 40px -10px rgba(0, 242, 254, 0.2);
-  transform: translateY(-4px);
-}
-
-/* Gradient Text */
-.text-gradient-cyan {
-  background: linear-gradient(135deg, #ffffff 0%, #38bdf8 50%, #00f2fe 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-gradient-violet {
-  background: linear-gradient(135deg, #f1f5f9 0%, #c084fc 50%, #8b5cf6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-gradient-cyber {
-  background: linear-gradient(135deg, #00f2fe 0%, #818cf8 50%, #c084fc 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Ambient Glow Effects */
-.glow-cyan-sm {
-  box-shadow: 0 0 15px -3px var(--cyan-glow);
-}
-
-.glow-cyan-lg {
-  box-shadow: 0 0 35px -5px var(--cyan-glow);
-}
-
-.glow-violet-sm {
-  box-shadow: 0 0 15px -3px var(--violet-glow);
-}
-
-.glow-violet-lg {
-  box-shadow: 0 0 35px -5px var(--violet-glow);
-}
-
-/* Cyber Badge */
-.cyber-badge {
+/* Frosted Pill Badge */
+.dotr-pill-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.35rem 0.85rem;
+  padding: 0.45rem 1.1rem;
   border-radius: 9999px;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-family: var(--font-body);
+  font-size: 0.825rem;
   font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  background: rgba(14, 165, 233, 0.1);
-  border: 1px solid rgba(56, 189, 248, 0.25);
-  color: #38bdf8;
-  backdrop-filter: blur(8px);
-}
-
-/* Cyber Buttons */
-.cyber-btn-primary {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  padding: 0.8rem 1.6rem;
-  border-radius: 0.75rem;
-  font-family: var(--font-heading);
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: #07090e;
-  background: linear-gradient(135deg, #00f2fe 0%, #38bdf8 100%);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 0 25px -4px rgba(0, 242, 254, 0.5);
-  cursor: pointer;
-  overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  text-decoration: none;
-}
-
-.cyber-btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 35px 0px rgba(0, 242, 254, 0.75);
-  background: linear-gradient(135deg, #38bdf8 0%, #00f2fe 100%);
-}
-
-.cyber-btn-secondary {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  padding: 0.8rem 1.6rem;
-  border-radius: 0.75rem;
-  font-family: var(--font-heading);
-  font-weight: 500;
-  font-size: 0.95rem;
-  color: #e2e8f0;
-  background: rgba(30, 41, 59, 0.5);
+  color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(12px);
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  text-decoration: none;
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-.cyber-btn-secondary:hover {
+/* Primary DotR Button (Solid Royal Cobalt Pill) */
+.dotr-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.8rem 1.8rem;
+  border-radius: 9999px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.925rem;
   color: #ffffff;
-  background: rgba(51, 65, 85, 0.7);
-  border-color: rgba(56, 189, 248, 0.4);
-  box-shadow: 0 0 20px -3px rgba(56, 189, 248, 0.25);
+  background: #1d4ed8;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 18px rgba(29, 78, 216, 0.35);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dotr-btn-primary:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.45);
+}
+
+/* Secondary DotR Button (Frosted Pill with Subtle Border) */
+.dotr-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.8rem 1.8rem;
+  border-radius: 9999px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.925rem;
+  color: #e2e8f0;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dotr-btn-secondary:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
   transform: translateY(-2px);
 }
 
-/* Keyframe Animations */
-@keyframes floatSlow {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-12px) rotate(1deg);
-  }
+/* Agency Feature Card (Rounded-3xl, clean border, gentle lift) */
+.dotr-card {
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.5rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes pulseSubtle {
-  0%, 100% {
-    opacity: 0.4;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.7;
-    transform: scale(1.04);
-  }
+.dotr-card:hover {
+  background: rgba(20, 30, 55, 0.7);
+  border-color: rgba(59, 130, 246, 0.35);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
 }
 
-@keyframes spinSlow {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Icon Squircle Badge (like dotr.in departments) */
+.dotr-icon-box {
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 1rem;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #60a5fa;
+  transition: all 0.25s ease;
 }
 
-.animate-float-slow {
-  animation: floatSlow 6s ease-in-out infinite;
+.dotr-card:hover .dotr-icon-box {
+  background: rgba(59, 130, 246, 0.18);
+  border-color: rgba(59, 130, 246, 0.4);
+  transform: scale(1.05);
 }
 
-.animate-pulse-subtle {
-  animation: pulseSubtle 4s ease-in-out infinite;
+/* Text Gradient Royal Accent */
+.text-gradient-royal {
+  background: linear-gradient(135deg, #ffffff 30%, #93c5fd 75%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.animate-spin-slow {
-  animation: spinSlow 20s linear infinite;
+.text-royal {
+  color: #3b82f6;
+}
+
+/* ==========================================================================
+   ANIMATIONS: MARQUEE TICKER & SUBTLE FLOATS
+   ========================================================================== */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float-gentle {
+  animation: floatGentle 5s ease-in-out infinite;
 }
 
 /* Accessibility: Reduced Motion */
