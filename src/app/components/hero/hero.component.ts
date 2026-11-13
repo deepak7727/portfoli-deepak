@@ -7,7 +7,6 @@ import { PortfolioService } from '../../core/services/portfolio.service';
   template: `
     <section id="hero" class="relative pt-36 sm:pt-44 pb-20 overflow-hidden text-center z-10">
       <div class="max-w-5xl mx-auto px-4 sm:px-6">
-        
         <!-- Top Pill Badge (dotr.in style) -->
         <div class="inline-flex mb-8">
           <div class="dotr-pill-badge">
@@ -17,14 +16,22 @@ import { PortfolioService } from '../../core/services/portfolio.service';
         </div>
 
         <!-- Main Display Headline (dotr.in style) -->
-        <h1 class="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.12]">
+        <h1
+          class="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.12]"
+        >
           Production Mobile Apps <br class="hidden sm:inline" />
           That <span class="text-blue-500">Scale</span>
         </h1>
 
         <!-- Subtitle Paragraph -->
-        <p class="text-slate-300 text-base sm:text-xl max-w-3xl mx-auto leading-relaxed mb-10 font-normal">
-          I'm <strong class="text-white font-semibold">Deepak Panchal</strong>, a Mobile App Developer with 2.5+ years of production experience building scalable, high-performance mobile applications using <strong class="text-white font-medium">Flutter, Dart, and Kotlin</strong>. Delivering reliable user experiences with Clean Architecture, BLoC, and hardware-accelerated systems.
+        <p
+          class="text-slate-300 text-base sm:text-xl max-w-3xl mx-auto leading-relaxed mb-10 font-normal"
+        >
+          I'm <strong class="text-white font-semibold">Deepak Panchal</strong>, a Mobile App
+          Developer with 2.5+ years of production experience building scalable, high-performance
+          mobile applications using
+          <strong class="text-white font-medium">Flutter, Dart, and Kotlin</strong>. Delivering
+          reliable user experiences with Clean Architecture, BLoC, and hardware-accelerated systems.
         </p>
 
         <!-- Call to Action Buttons (dotr.in style) -->
@@ -39,28 +46,36 @@ import { PortfolioService } from '../../core/services/portfolio.service';
             <span>View Production Work</span>
           </a>
 
-          <a 
-            [href]="portfolio.personalInfo().resumePdfUrl" 
-            download="Deepak-Panchal-Resume.pdf"
-            target="_blank"
-            class="dotr-btn-secondary">
+          <a
+            [href]="portfolio.personalInfo().resumePdfUrl"
+            (click)="portfolio.downloadResume($event)"
+            download="deepak-panchal-resume.pdf"
+            class="dotr-btn-secondary cursor-pointer"
+          >
             <span>📄</span>
             <span>Download Resume PDF</span>
           </a>
         </div>
 
         <!-- Developer Profile Card (Clean & Sophisticated, Zero Neon) -->
-        <div class="inline-flex items-center gap-4 p-2.5 sm:p-3 pr-6 rounded-full bg-slate-900/80 border border-white/10 backdrop-blur-md shadow-2xl">
-          <div class="relative w-12 h-12 rounded-full overflow-hidden border-2 border-blue-500 shadow-md">
-            <img 
-              [src]="portfolio.personalInfo().avatarUrl" 
+        <div
+          class="inline-flex items-center gap-4 p-2.5 sm:p-3 pr-6 rounded-full bg-slate-900/80 border border-white/10 backdrop-blur-md shadow-2xl"
+        >
+          <div
+            class="relative w-12 h-12 rounded-full overflow-hidden border-2 border-blue-500 shadow-md"
+          >
+            <img
+              [src]="portfolio.personalInfo().avatarUrl"
               alt="Deepak Panchal"
-              class="w-full h-full object-cover object-top" />
+              class="w-full h-full object-cover object-top"
+            />
           </div>
           <div class="text-left">
             <div class="flex items-center gap-2">
               <span class="text-sm font-bold text-white">Deepak Panchal</span>
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-blue-500/20 text-blue-300 font-semibold border border-blue-500/30">
+              <span
+                class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-blue-500/20 text-blue-300 font-semibold border border-blue-500/30"
+              >
                 ACTIVE AT TECHABBOT
               </span>
             </div>
@@ -69,12 +84,13 @@ import { PortfolioService } from '../../core/services/portfolio.service';
             </div>
           </div>
         </div>
-
       </div>
 
       <!-- Infinite Marquee / Ticker Bar (Exact dotr.in style) -->
       <div class="mt-20 w-full bg-[#050b2c] border-y border-white/10 py-3.5 overflow-hidden">
-        <div class="animate-marquee items-center gap-8 text-xs sm:text-sm font-medium text-slate-300 whitespace-nowrap">
+        <div
+          class="animate-marquee items-center gap-8 text-xs sm:text-sm font-medium text-slate-300 whitespace-nowrap"
+        >
           @for (repeat of [1, 2]; track repeat) {
             <span class="inline-flex items-center gap-2">
               <span class="text-blue-400">⚡</span> 2.5+ Years Production Experience
@@ -97,18 +113,20 @@ import { PortfolioService } from '../../core/services/portfolio.service';
             </span>
             <span class="text-slate-600">•</span>
             <span class="inline-flex items-center gap-2">
-              <span class="text-blue-400">🚀</span> Shipped to Google Play Store &amp; Apple App Store
+              <span class="text-blue-400">🚀</span> Shipped to Google Play Store &amp; Apple App
+              Store
             </span>
             <span class="text-slate-600">•</span>
             <span class="inline-flex items-center gap-2">
-              <span class="text-blue-400">🤖</span> AI-Accelerated Engineering &amp; Prompt Workflows
+              <span class="text-blue-400">🤖</span> AI-Accelerated Engineering &amp; Prompt
+              Workflows
             </span>
             <span class="text-slate-600">•</span>
           }
         </div>
       </div>
     </section>
-  `
+  `,
 })
 export class HeroComponent {
   protected readonly portfolio = inject(PortfolioService);
