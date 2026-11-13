@@ -27,7 +27,7 @@ export class PortfolioService {
     email: 'dp245289@gmail.com',
     linkedin: 'https://www.linkedin.com/in/deepak-panchal-dev',
     github: 'https://github.com/deepakpanchal',
-    avatarUrl: '/assets/profile.png',
+    avatarUrl: 'assets/profile.png',
     resumePdfUrl: 'assets/deepak-panchal-resume.pdf',
     metrics: [
       {
@@ -78,30 +78,30 @@ export class PortfolioService {
         'Architected immutable transaction models using BLoC state management and local indexed caches, ensuring 60fps rendering even with extensive transaction histories.',
       myContribution:
         'Architected complete Flutter frontend, integrated state machines with BLoC, built custom UI with ScreenUtil for pixel-perfect iOS/Android consistency, and implemented OTP login flow.',
-      thumbnail: '/assets/projects/hisabpro-dashboard.png',
+      thumbnail: 'assets/projects/hisabpro-dashboard.png',
       screenshots: [
         {
-          url: '/assets/projects/hisabpro-dashboard.png',
+          url: 'assets/projects/hisabpro-dashboard.png',
           caption: 'Real-time Financial Ledger & Receivables Dashboard',
         },
         {
-          url: '/assets/projects/hisabpro-customers.png',
+          url: 'assets/projects/hisabpro-customers.png',
           caption: 'Customer Directory & Outstanding Balances',
         },
         {
-          url: '/assets/projects/hisabpro-transactions.png',
+          url: 'assets/projects/hisabpro-transactions.png',
           caption: 'Transaction Stream & Payment Settlement Records',
         },
         {
-          url: '/assets/projects/hisabpro-add-customer.png',
+          url: 'assets/projects/hisabpro-add-customer.png',
           caption: 'Customer Onboarding & Contact Picker',
         },
         {
-          url: '/assets/projects/hisabpro-payment.png',
+          url: 'assets/projects/hisabpro-payment.png',
           caption: 'Instant Payment Settlement Entry',
         },
-        { url: '/assets/projects/hisabpro-otp.png', caption: 'Mobile OTP Verification Screen' },
-        { url: '/assets/projects/hisabpro-settings.png', caption: 'Account & Business Settings' },
+        { url: 'assets/projects/hisabpro-otp.png', caption: 'Mobile OTP Verification Screen' },
+        { url: 'assets/projects/hisabpro-settings.png', caption: 'Account & Business Settings' },
       ],
       stats: [
         { label: 'Platform', value: 'iOS & Android' },
@@ -141,38 +141,38 @@ export class PortfolioService {
         'Created an isolated background PDF rendering pipeline using Flutter compute isolates, preventing UI stutter during intensive document synthesis.',
       myContribution:
         'Engineered the PDF rendering engine, client & item management flows, reactive business analytics screen, and local persistence layer using GetStorage.',
-      thumbnail: '/assets/projects/invoicemaker-dashboard.png',
+      thumbnail: 'assets/projects/invoicemaker-dashboard.png',
       screenshots: [
         {
-          url: '/assets/projects/invoicemaker-dashboard.png',
+          url: 'assets/projects/invoicemaker-dashboard.png',
           caption: 'Business Overview & Revenue Analytics',
         },
         {
-          url: '/assets/projects/invoicemaker-pdf.png',
+          url: 'assets/projects/invoicemaker-pdf.png',
           caption: 'Automated Vector PDF Invoice Preview (INV-2026-001)',
         },
         {
-          url: '/assets/projects/invoicemaker-create.png',
+          url: 'assets/projects/invoicemaker-create.png',
           caption: 'Smart Invoice Builder with Template Engine',
         },
         {
-          url: '/assets/projects/invoicemaker-list.png',
+          url: 'assets/projects/invoicemaker-list.png',
           caption: 'Searchable Filterable Invoices Ledger',
         },
         {
-          url: '/assets/projects/invoicemaker-items.png',
+          url: 'assets/projects/invoicemaker-items.png',
           caption: 'Inventory & Service Catalog Manager',
         },
         {
-          url: '/assets/projects/invoicemaker-client.png',
+          url: 'assets/projects/invoicemaker-client.png',
           caption: 'Client Directory & GST Detail Management',
         },
         {
-          url: '/assets/projects/invoicemaker-analytics.png',
+          url: 'assets/projects/invoicemaker-analytics.png',
           caption: 'Invoice Status & Financial Performance Metrics',
         },
         {
-          url: '/assets/projects/invoicemaker-profile.png',
+          url: 'assets/projects/invoicemaker-profile.png',
           caption: 'Business Profile & Tax Configuration',
         },
       ],
@@ -214,14 +214,14 @@ export class PortfolioService {
         'Built custom Kotlin platform channels for zero-latency laser scanner interrupts and an offline-first transaction queue with conflict-free sync.',
       myContribution:
         'Implemented scanner driver integration, picking workflow state machines in BLoC, route assignment UI, and offline database synchronization.',
-      thumbnail: '/assets/projects/invoicemaker-items.png',
+      thumbnail: 'assets/projects/invoicemaker-items.png',
       screenshots: [
         {
-          url: '/assets/projects/invoicemaker-items.png',
+          url: 'assets/projects/invoicemaker-items.png',
           caption: 'Item Identification & Batch Catalog Tracking',
         },
         {
-          url: '/assets/projects/invoicemaker-list.png',
+          url: 'assets/projects/invoicemaker-list.png',
           caption: 'Order Dispatch Queue & Verification Status',
         },
       ],
@@ -255,14 +255,14 @@ export class PortfolioService {
         'Implemented idempotent payment webhooks and resilient local state rollbacks using Riverpod state notifiers.',
       myContribution:
         'Designed and built the checkout funnel, integrated payment SDKs, implemented push notifications via Firebase, and built responsive cart components.',
-      thumbnail: '/assets/projects/invoicemaker-create.png',
+      thumbnail: 'assets/projects/invoicemaker-create.png',
       screenshots: [
         {
-          url: '/assets/projects/invoicemaker-create.png',
+          url: 'assets/projects/invoicemaker-create.png',
           caption: 'Dynamic Product Configuration & Checkout Builder',
         },
         {
-          url: '/assets/projects/invoicemaker-analytics.png',
+          url: 'assets/projects/invoicemaker-analytics.png',
           caption: 'Order History & Status Tracking',
         },
       ],
@@ -294,10 +294,10 @@ export class PortfolioService {
         'Configured robust foreground services with media session callbacks to maintain uninterrupted playback.',
       myContribution:
         'Built media library querying engine, background audio service connector, and interactive waveform playback UI.',
-      thumbnail: '/assets/projects/hisabpro-transactions.png',
+      thumbnail: 'assets/projects/hisabpro-transactions.png',
       screenshots: [
         {
-          url: '/assets/projects/hisabpro-transactions.png',
+          url: 'assets/projects/hisabpro-transactions.png',
           caption: 'Media Library Stream & Playback Manager',
         },
       ],
@@ -330,10 +330,10 @@ export class PortfolioService {
         'Configured ExoPlayer buffer pre-caching and state preservation across full-screen transitions.',
       myContribution:
         'Implemented Firebase Authentication, Cloud Messaging triggers, and customized the video player overlay with gesture controls.',
-      thumbnail: '/assets/projects/hisabpro-dashboard.png',
+      thumbnail: 'assets/projects/hisabpro-dashboard.png',
       screenshots: [
         {
-          url: '/assets/projects/hisabpro-dashboard.png',
+          url: 'assets/projects/hisabpro-dashboard.png',
           caption: 'Streaming Content Feed & Watchlist',
         },
       ],
