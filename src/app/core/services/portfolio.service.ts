@@ -596,7 +596,9 @@ export class PortfolioService {
       return;
     }
 
-    fetch(resumeUrl)
+    const resolvedUrl = new URL(resumeUrl, document.baseURI).href;
+
+    fetch(resolvedUrl)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`Failed to fetch resume: ${res.status} ${res.statusText}`);
@@ -616,7 +618,7 @@ export class PortfolioService {
       .catch((error) => {
         console.warn('Direct blob download failed, falling back to anchor trigger:', error);
         const fallbackLink = document.createElement('a');
-        fallbackLink.href = resumeUrl;
+        fallbackLink.href = resolvedUrl;
         fallbackLink.download = fileName;
         fallbackLink.target = '_blank';
         document.body.appendChild(fallbackLink);
